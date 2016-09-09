@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 cd ~/Burn_tool_script
 while true; do
 	make reflash_ulink2
