@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ~/software/mm_tools
+cd ~/Burn_tool_script
 while true; do
 	make reflash_ulink2
 echo;
