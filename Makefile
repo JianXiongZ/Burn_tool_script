@@ -38,6 +38,17 @@ reflash: $(HARDWARE_NAME).mcs
 	/bin/bash -c '$(xil_env) && impact -batch $(BATCHFILE)'
 	@rm -f $(BATCHFILE)
 
+reflash_2: $(HARDWARE_NAME).mcs
+	echo setmode -bs	>> $(BATCHFILE)
+	echo setcable -p auto	>> $(BATCHFILE)
+	echo identify		>> $(BATCHFILE)
+	echo attachFlash -p 1 -spi W25Q16BV		>> $(BATCHFILE)
+	echo assignfiletoattachedflash -p 1 -file $<	>> $(BATCHFILE)
+	echo program -p 1 -dataWidth 4 -spionly -erase -loadfpga >> $(BATCHFILE)
+	echo exit		>> $(BATCHFILE)
+	/bin/bash -c '$(xil_env) && impact -batch $(BATCHFILE)'
+	@rm -f $(BATCHFILE)
+
 load: $(HARDWARE_NAME).bit
 	echo setmode -bs	>> $(BATCHFILE)
 	echo setcable -p auto	>> $(BATCHFILE)
