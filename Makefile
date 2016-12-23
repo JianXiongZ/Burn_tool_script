@@ -8,7 +8,8 @@
 #
 # ----- Customer ----------------------------------------------------------
 BATCHFILE	:= $(shell mktemp)
-HARDWARE_NAME	= mm
+HARDWARE_NAME	= MM721
+HARDWARE_NAME_2 = MM741
 
 isedir  ?= /home/Xilinx/14.6/ISE_DS
 xil_env ?= . $(isedir)/settings$(shell getconf LONG_BIT).sh &>/dev/null
@@ -38,7 +39,7 @@ reflash: $(HARDWARE_NAME).mcs
 	/bin/bash -c '$(xil_env) && impact -batch $(BATCHFILE)'
 	@rm -f $(BATCHFILE)
 
-reflash_2: $(HARDWARE_NAME).mcs
+reflash_2: $(HARDWARE_NAME_2).mcs
 	echo setmode -bs	>> $(BATCHFILE)
 	echo setcable -p auto	>> $(BATCHFILE)
 	echo identify		>> $(BATCHFILE)
