@@ -70,7 +70,10 @@ erase:
 	/bin/bash -c '$(xil_env) && impact -batch $(BATCHFILE)'
 	@rm -f $(BATCHFILE)
 
-reflash_ulink2: pmu.axf erase_ulink2
+reflash_ulink2: pmu721.axf erase_ulink2
+	(while ! (sleep 0.5 && $(LPCXPRESSODIR)/crt_emu_cm_redlink -flash-load-exec $< $(NXP_PARAMETERS)); do : ; done;)
+
+reflash_ulink2_2: pmu741.axf erase_ulink2
 	(while ! (sleep 0.5 && $(LPCXPRESSODIR)/crt_emu_cm_redlink -flash-load-exec $< $(NXP_PARAMETERS)); do : ; done;)
 
 erase_ulink2:
